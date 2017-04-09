@@ -61,7 +61,10 @@ while 1:
         submission.reply(generateReply())
         print(submission.title)
       except praw.exceptions.APIException as error:
-        m_sleep(int(re.search(sleep_time_regex, error.message).group(0))*60)
+        #m_sleep(int(re.search(sleep_time_regex, error.message).group(0))*60)
+        print(error.message)
+        break
+  os.system("date")
   for comment in subreddit.comments(limit=None):
     if(re.search(regex, comment.body) and not
       alreadyReply(comment.replies.list())):
@@ -70,4 +73,5 @@ while 1:
         print("replied to comment\n")
       except praw.exceptions.APIException as error:
         m_sleep(int(re.search(sleep_time_regex, error.message).group(0))*60)
+        print(error.message)
   m_sleep(10)
